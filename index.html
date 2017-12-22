@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<title> Calendar Generator </title>
+		<meta charset='utf-8'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<meta name="author" content="Paweł Kania">
+		<meta http-equiv='Expires' content='0' />
+		<meta http-equiv='Pragma' content='no-cache' />
+		<meta http-equiv='Cache-Control' content='no-cache, no-store, must-revalidate' />
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+
+		<link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb' crossorigin='anonymous' />
+		<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous' />
+		<link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet' />
+		<link href='https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.6.3/jquery.contextMenu.min.css' rel='stylesheet' integrity='sha256-rZaCYVSzIuKLAbuM94jgacBYvQH4jNBn1OmUb2beFX4=' crossorigin='anonymous' />
+
+		<script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
+		<script src='https://code.jquery.com/ui/1.12.1/jquery-ui.min.js' integrity='sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=' crossorigin='anonymous'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.6.3/jquery.ui.position.min.js' integrity='sha256-C7HjUf9VdfVJ5Dxet+nW9wK7rKLAhEkEYMjGXsw7FM8=' crossorigin='anonymous'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.6.3/jquery.contextMenu.min.js' integrity='sha256-UuDRkiRM7U9K7WKRGS4u7fcj+L43O71/bg5/zwRFLW0=' crossorigin='anonymous'></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js' integrity='sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n' crossorigin='anonymous'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js'></script>
+		<script src='https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js'></script>
+		<script src='https://cdn.jsdelivr.net/npm/lzutf8/build/production/lzutf8.min.js'></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.3/svg.min.js"></script>
+
+		<link href='style.css' type='text/css' rel='stylesheet'>
+		<link href='lib/styles/spectrum.css' type='text/css' rel='stylesheet'>
+
+		<script src='lib/CalGen.js' type='text/javascript'></script>
+		<script src='lib/jquery.maskedinput.min.js' type='text/javascript'></script>
+		<script src='lib/svg.filter.js' type='text/javascript'></script>
+		<script src='lib/svg.panzoom.js' type='text/javascript'></script>
+		<script src='lib/svg.utility.js' type='text/javascript'></script>
+		<script src='lib/qrjs2.min.js' type='text/javascript'></script>
+		<script src='lib/spectrum.js' type='text/javascript'></script>
+		<script>
+			$(function() { window.calendar = new CalGen() });
+		</script>
+	</head>
+	<body>
+		<div id='header' class='container-fluid'>
+			<i id='octicon' class='fa fa-github'></i>
+			<i id='twitter' class='fa fa-twitter'></i>			
+			<p class='lead'>Calendar generator</p>
+		</div>
+		<div id='screen'></div>
+		<div id='toolbar' class='btn-toolbar d-inline-block text-nowrap' role='toolbar'>
+			<div class='btn-group mr-2' role='group'>
+				<a id='new-proj' type='button' class='btn btn-secondary' data-toggle='tooltip' data-placement='bottom' title='New project'>
+					<i class='fa fa-file-o' aria-hidden='true'></i>
+				</a>
+				<a id='open-proj' type='button' class='btn btn-secondary' data-toggle='tooltip' data-placement='bottom' title='Open project'>
+					<i class='fa fa-folder-open-o' aria-hidden='true'></i>
+				</a>
+				<a id='dropdown-save-as' class='btn btn-secondary' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+					<i class='fa fa-floppy-o' aria-hidden='true'></i>
+				</a>
+				<div class='dropdown-menu' aria-labelledby='dropdown-save-as'>
+					<a class='dropdown-item save-as' format='cgp' href='#'>CGP</a>
+					<a class='dropdown-item save-as' format='zip' href='#'>ZIP</a>
+					<a class='dropdown-item save-as' format='storage' href='#'>Browser storage</a>
+				</div>
+				<a id='print-proj' type='button' class='btn btn-secondary' data-toggle='tooltip' data-placement='bottom' title='Print'>
+					<i class='fa fa-print' aria-hidden='true'></i>
+				</a>
+				<a id='settings-proj' type='button' class='btn btn-secondary' data-toggle='tooltip' data-placement='bottom' title='Project settings'>
+					<i class='fa fa-cog' aria-hidden='true'></i>
+				</a>
+				<a id='close-proj' type='button' class='btn btn-secondary' data-toggle='tooltip' data-placement='bottom' title='Close'>
+					<i class='fa fa-times' aria-hidden='true'></i>
+				</a>
+			</div>
+			<div class='btn-group mr-2' role='group'>
+				<a id='prev-page' type='button' class='btn btn-secondary' data-toggle='tooltip' data-placement='bottom' title='Previous page'>
+					<i class='fa fa-chevron-left' aria-hidden='true'></i>
+				</a>
+				<div type='text' class='btn btn-secondary'>
+					<div id='page_number' class='well'></div>
+				</div>
+				<a id='next-page' type='button' class='btn btn-secondary' data-toggle='tooltip' data-placement='bottom' title='Next page'>
+					<i class='fa fa-chevron-right' aria-hidden='true'></i>
+				</a>
+			</div>
+			<div class='btn-group' role='group'>
+				<div id='drag-handle' type='button' class='btn btn-secondary'>
+					<i class='fa fa-ellipsis-v' aria-hidden='true'></i>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

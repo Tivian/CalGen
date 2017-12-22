@@ -1,0 +1,78 @@
+html {
+	overflow: hidden;
+}
+
+#header {
+	position: absolute;
+	height: 2rem;
+	color: white;
+	font-size: 1.7rem;
+	text-align: center;
+	background-color: #383838;
+	z-index: 9999;
+}
+
+#octicon {
+	left: 0.3rem;
+}
+
+#twitter {
+	left: 2.3rem;
+}
+
+#octicon, #twitter {
+	position: absolute;
+	padding-top: 0.1rem;
+	color: #bababa;
+}
+
+#octicon:hover {
+	color: #ffffff;
+}
+
+#twitter:hover {
+	color: #1da1f2;
+}
+
+#octicon:hover, #twitter:hover {
+	cursor: pointer;
+}
+
+#screen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #1e1e1e;
+}
+
+#drag-handle:hover {
+	cursor: all-scroll;
+}
+
+#toolbar a.btn {
+	color: #fff !important;
+}
+
+#toolbar a.btn:hover {
+	cursor: pointer !important;
+}
+
+#toolbar a.btn:active {
+	color: #000 !important;
+}
+
+#custom-handle {
+	width: 3em;
+	height: 1.6em;
+	top: 50%;
+	margin-top: -.8em;
+	margin-left: -1.5em;
+	text-align: center;
+	line-height: 1.6em;
+}
+
+.modal-footer button:hover, #snackbar {
+	cursor: pointer;
+}
