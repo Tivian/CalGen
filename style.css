@@ -73,6 +73,6 @@ html {
 	line-height: 1.6em;
 }
 
-.modal-footer button:hover, #snackbar {
+.modal button:hover, #snackbar {
 	cursor: pointer;
 }
