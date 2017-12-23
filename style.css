@@ -76,3 +76,7 @@ html {
 .modal button:hover, #snackbar {
 	cursor: pointer;
 }
+
+.picker-placeholder {
+	width: 0;
+}
