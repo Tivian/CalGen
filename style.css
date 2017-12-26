@@ -48,15 +48,17 @@ html {
 }
 
 #drag-handle:hover {
-	cursor: all-scroll;
+	cursor: all-scroll !important;
 }
 
-#toolbar a.btn {
+#toolbar .btn {
 	color: #fff !important;
+	-moz-appearance: none;
+	-webkit-appearance: none;
 }
 
 #toolbar a.btn:hover {
-	cursor: pointer !important;
+	cursor: pointer;
 }
 
 #toolbar a.btn:active {
